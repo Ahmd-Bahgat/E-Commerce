@@ -1,7 +1,6 @@
 import userModel from "../models/userModel.ts";
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
-
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 interface registerParams {
   firstName: string;
@@ -20,10 +19,15 @@ export const register = async ({
   if (findUser) {
     return { data: "email already exists!", statusCode: 400 };
   }
-  const hashedPassword = await bcrypt.hash(password, 10)
-  const newUser = new userModel({ firstName, lastName, email, password: hashedPassword });
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = new userModel({
+    firstName,
+    lastName,
+    email,
+    password: hashedPassword,
+  });
   await newUser.save();
-  return { data: generateJWT({firstName,lastName,email}), statusCode: 200 };
+  return { data: generateJWT({ firstName, lastName, email }), statusCode: 200 };
 };
 
 interface userLogin {
@@ -36,13 +40,20 @@ export const login = async ({ email, password }: userLogin) => {
   if (!findUser) {
     return { data: "incorrect email or password", statusCode: 400 };
   }
-  const passwordCheck = await bcrypt.compare(password, findUser.password)
-  if (passwordCheck) {
-    return { data: generateJWT({firstName:findUser,lastName:findUser,email:findUser}), statusCode: 200 };
+  const passwordMatch = await bcrypt.compare(password, findUser.password);
+  if (passwordMatch) {
+    return {
+      data: generateJWT({
+        firstName: findUser,
+        lastName: findUser,
+        email: findUser,
+      }),
+      statusCode: 200,
+    };
   }
-  return { data:"incorrect email or password", statusCode:400 };
+  return { data: "incorrect email or password", statusCode: 400 };
 };
 
-const generateJWT = (data:any)=>{
-  return jwt.sign(data,"#)7Gvq7vyV(Cm^c&(5F4+UZ62S$%ayZFqhUA#mIe!xrFQ6!8xV")
-}
+const generateJWT = (data: any) => {
+  return jwt.sign(data, "#)7Gvq7vyV(Cm^c&(5F4+UZ62S$%ayZFqhUA#mIe!xrFQ6!8xV");
+};
