@@ -1,4 +1,4 @@
-import { getAllProduct } from "../services/productService.ts";
+import { getAllProduct } from "../services/productService";
 import express from "express"
 
 const productRoute = express.Router()

@@ -1,12 +1,16 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import userModel from "../models/userModel.ts";
+import userModel from "../models/userModel";
 
-interface ExtendRequest extends Request {
-  user?: any;
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
 }
 
-const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
+const validateJWT = (req: Request, res: Response, next: NextFunction) => {
   const authorizationHeader = req.get("authorization");
   if (!authorizationHeader) {
     res.status(403).send("authorization header was not provided");
@@ -32,7 +36,7 @@ const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
       }
       const userPayload = payload as {
         email: string;
-        firsName: string;
+        firstName: string;
         lastName: string;
       };
       // fetch user from database based on the payload

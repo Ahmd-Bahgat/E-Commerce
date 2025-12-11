@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import router from "./routers/userRouter.ts";
-import { seedInitialProducts } from "./services/productService.ts";
-import productRoute from "./routers/productRoute.ts";
-import cartRouter from "./routers/cartRouter.ts";
+import router from "./routers/userRouter";
+import { seedInitialProducts } from "./services/productService";
+import productRoute from "./routers/productRoute";
+import cartRouter from "./routers/cartRouter";
 
 
 
