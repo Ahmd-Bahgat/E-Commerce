@@ -8,9 +8,10 @@ export const seedInitialProducts = async () => {
   const products = [
     {
       title: "MacBook ",
-      image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQM7AYmhfrD59r6T5j1YPON4s57sY6RjZMye9YefNgAt8W29EJrWyKJTpkkMR0dsoXlURXrVHZMB_3dcFMSZKK5XPxeweKqEFCXrfimR72UcHRpf85hR1wfWq3Yc7l5O7e-iwxTf28AaA&usqp=CAc",
+      image:
+        "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQM7AYmhfrD59r6T5j1YPON4s57sY6RjZMye9YefNgAt8W29EJrWyKJTpkkMR0dsoXlURXrVHZMB_3dcFMSZKK5XPxeweKqEFCXrfimR72UcHRpf85hR1wfWq3Yc7l5O7e-iwxTf28AaA&usqp=CAc",
       price: 25000,
-      stock: 7,
+      stock: 10,
     },
   ];
   const existsingProducts = await getAllProduct();
@@ -19,4 +20,3 @@ export const seedInitialProducts = async () => {
     await productModel.insertMany(products);
   }
 };
- 

@@ -3,10 +3,10 @@ import type { IProduct } from "./productModel";
 
 const cartStatusEnum = ["active", "completed"];
 
-export interface ICartItem extends Document {
+export interface ICartItem{
   product: IProduct;
   unitPrice: number;
-  qauntity: number;
+  quantity: number;
 }
 
 export interface ICart extends Document {
@@ -19,7 +19,7 @@ export interface ICart extends Document {
 const CartItemSchema = new Schema<ICartItem>({
   product: { type: Schema.Types.ObjectId, ref: "product", required: true },
   unitPrice: { type: Number, required: true },
-  qauntity: { type: Number, default: 1, required: true },
+  quantity: { type: Number, default: 1, required: true },
 });
 
 const CartSchema = new Schema<ICart>({
